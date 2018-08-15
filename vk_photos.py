@@ -19,8 +19,8 @@ touch('vk.txt')
 
 #получаем список лайкнутых фоток в виде json
 api_key='https://api.vk.com/method/fave.getPhotos?'
-api_token='access_token=1c6a31dc5b5552b25b995546bfbf6d9d660b8f34971173c696793a0e97b8a8796da74ce411d2ae480f3b8'
-api_owner_id='owner_id=6662087'
+api_token='access_token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+api_owner_id='owner_id=PUT_YOUR_APP_ID_HERE'
 api_count='count=9999'
 address = api_key+'&'+api_owner_id+'&'+api_count+'&'+api_token+'&v=5.21'
 
