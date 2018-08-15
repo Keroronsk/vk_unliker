@@ -2,12 +2,6 @@
 # -*- coding: utf-8 -*-
 
 #описание: скрипт удаляет "лайкнутые" фотографии из "моё избранное" Вконтакта.
-#алгоритм действий: идём на https://vk.com/apps?act=manage и создаем свое пустое приложение (stand-alone)
-#открываем его настройки, копируем сервисный ключ доступа и ID приложения в скрипт (acess_token=   owner_id=)
-#даем своему приложению права на работу со своей стеной (открываем ссылку ниже, заменив PUT_YOUR_APP_ID_HERE на ID своего приложения):
-#https://oauth.vk.com/authorize?client_id=PUT_YOUR_APP_ID_HERE&scope=friends+wall,offline&redirect_uri=https://oauth.vk.com/blank.html&display=page&v=5.21&response_type=token
-#ставим Python 3 (если еще нет), запускаем скрипты, смотрим результат.
-#каждый скрипт удаляет примерно 20 записей за раз, после чего VK требует ввод капчи. Можно добавить скрипт в планировщик, чтобы он вызывался, к примеру, каждый час.
 
 
 from urllib.request import urlopen
@@ -25,8 +19,8 @@ touch('vk.txt')
 
 #получаем список лайкнутых фоток в виде json
 api_key='https://api.vk.com/method/fave.getPhotos?'
-api_token='access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-api_owner_id='owner_id=PUT_YOUR_APP_ID_HERE'
+api_token='access_token=1c6a31dc5b5552b25b995546bfbf6d9d660b8f34971173c696793a0e97b8a8796da74ce411d2ae480f3b8'
+api_owner_id='owner_id=6662087'
 api_count='count=9999'
 address = api_key+'&'+api_owner_id+'&'+api_count+'&'+api_token+'&v=5.21'
 

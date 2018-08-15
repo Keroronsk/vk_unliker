@@ -1,6 +1,9 @@
 #! /usr/bin/env python3.2
 # -*- coding: utf-8 -*-
 
+#описание: скрипт удаляет "лайкнутые" видео из "моё избранное" Вконтакта.
+
+
 from urllib.request import urlopen
 import json
 import pprint
