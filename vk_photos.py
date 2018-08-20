@@ -4,7 +4,9 @@
 #описание: скрипт удаляет "лайкнутые" фотографии из "моё избранное" Вконтакта.
 
 
-from urllib.request import urlopen
+
+import requests
+
 import json
 import pprint
 import time
@@ -19,16 +21,22 @@ touch('vk.txt')
 
 #получаем список лайкнутых фоток в виде json
 api_key='https://api.vk.com/method/fave.getPhotos?'
-api_token='access_token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+api_token='access_token=PUT_YOUR_TOKEN_HERE'
 api_owner_id='owner_id=PUT_YOUR_APP_ID_HERE'
 api_count='count=9999'
 address = api_key+'&'+api_owner_id+'&'+api_count+'&'+api_token+'&v=5.21'
 
-#достаём из массива json массив с 'items'
-data = urlopen(address)
-decoded_response = data.read().decode()
-final_data = json.loads(decoded_response)
+proxies = {
+ # 'http': 'http://192.168.1.1:80',
+ # 'https': 'http://192.168.1.1:80',
+}
 
+#достаём из массива json массив с 'items'
+data = requests.get(address, proxies=proxies)
+final_data=data.json()
+final_data2 = final_data
+
+    
 try:
 	songs = final_data['response']['items']
 except:
@@ -39,12 +47,14 @@ except:
 photos= {}
 id=[]
 owner_id=[]
+photo_75=[]
 iii=0
 
 #кладем в массивы id и owner_id значения айдишников для удаления
 for song in songs:
 	id.append(song['id'])
 	owner_id.append(song['owner_id'])
+	photo_75.append(song['photo_75'])
 	iii+=1
 	
 
@@ -61,17 +71,19 @@ for photo in id:
 	
 	address = api_key+'&'+api_owner_id+'&'+api_item_id+'&'+api_token+'&v=5.21'
 	
-	data = urlopen(address)
-	decoded_response = data.read().decode()
-	final_data = json.loads(decoded_response)
+	data = requests.get(address, proxies=proxies)
+	final_data=data.json()
+    
 	try:
 		likes = final_data['response']['likes']
 		#print(likes)
 		print('like ID={} deleted...'.format(id[iii]))
+		print(photo_75[iii])
 	except:
 		print('error deleting like ID={}'.format(id[iii])) 
-		print(final_data) 
-		quit() # quit at this point
+		print(final_data)
+		print(photo_75[iii])
+		#quit() # quit at this point
 	iii+=1
 	kkk+=1
 	mmm+=1
